@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 class CandidateController extends Controller
 {
     
-    public function index(){
+    public function showCandidates(){
         if (Auth::check()) {
             // Recupera todos los candidatos y sus puntuaciones, por ejemplo
             $candidates = User::with(['experiences', 'skills', 'studies'])
                                ->orderBy('score', 'desc')
                                ->get();
-
+    
             // Pasar esta información a la vista.
             return view('candidates.index', compact('candidates'));
         } else {
