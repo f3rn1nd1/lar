@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Skill;
 use Illuminate\Http\Request;
-
+use App\Events\CandidateProfileUpdated;
 /**
  * Class SkillController
  * @package App\Http\Controllers
@@ -48,6 +48,7 @@ class SkillController extends Controller
         request()->validate(Skill::$rules);
 
         $skill = Skill::create($request->all());
+        event(new CandidateProfileUpdated(auth()->user()));
 
         return redirect()->route('skills.index')
             ->with('success', 'Skill created successfully.');
@@ -92,6 +93,7 @@ class SkillController extends Controller
         request()->validate(Skill::$rules);
 
         $skill->update($request->all());
+        event(new CandidateProfileUpdated(auth()->user()));
 
         return redirect()->route('skills.index')
             ->with('success', 'Skill updated successfully');
@@ -105,6 +107,7 @@ class SkillController extends Controller
     public function destroy($id)
     {
         $skill = Skill::find($id)->delete();
+        event(new CandidateProfileUpdated(auth()->user()));
 
         return redirect()->route('skills.index')
             ->with('success', 'Skill deleted successfully');

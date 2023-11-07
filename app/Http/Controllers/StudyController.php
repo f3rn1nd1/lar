@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Study;
 use Illuminate\Http\Request;
-
+use App\Events\CandidateProfileUpdated;
 /**
  * Class StudyController
  * @package App\Http\Controllers
@@ -47,6 +47,7 @@ class StudyController extends Controller
         request()->validate(Study::$rules);
 
         $study = Study::create($request->all());
+        event(new CandidateProfileUpdated(auth()->user()));
 
         return redirect()->route('studies.index')
             ->with('success', 'Study created successfully.');
@@ -91,6 +92,7 @@ class StudyController extends Controller
         request()->validate(Study::$rules);
 
         $study->update($request->all());
+        event(new CandidateProfileUpdated(auth()->user()));
 
         return redirect()->route('studies.index')
             ->with('success', 'Study updated successfully');
@@ -104,6 +106,7 @@ class StudyController extends Controller
     public function destroy($id)
     {
         $study = Study::find($id)->delete();
+        event(new CandidateProfileUpdated(auth()->user()));
 
         return redirect()->route('studies.index')
             ->with('success', 'Study deleted successfully');

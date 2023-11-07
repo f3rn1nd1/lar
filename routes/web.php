@@ -1,5 +1,6 @@
 <?php
-
+namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,4 +22,5 @@ Auth::routes();
 Route::resource('skills', App\Http\Controllers\SkillController::class)->middleware('auth');
 Route::resource('experiences', App\Http\Controllers\ExperienceController::class)->middleware('auth');
 Route::resource('studies', App\Http\Controllers\StudyController::class)->middleware('auth');
+Route::get('/candidates', [CandidateController::class, 'index']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

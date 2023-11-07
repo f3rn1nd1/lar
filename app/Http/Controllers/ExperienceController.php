@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Experience;
 use Illuminate\Http\Request;
-
+use App\Events\CandidateProfileUpdated;
 /**
  * Class ExperienceController
  * @package App\Http\Controllers
@@ -53,9 +53,11 @@ class ExperienceController extends Controller
         request()->validate(Experience::$rules);
 
         $experience = Experience::create($request->all());
+        event(new CandidateProfileUpdated(auth()->user()));
 
         return redirect()->route('experiences.index')
             ->with('success', 'Experience created successfully.');
+           
     }
 
     /**
@@ -100,6 +102,8 @@ class ExperienceController extends Controller
         request()->validate(Experience::$rules);
 
         $experience->update($request->all());
+        event(new CandidateProfileUpdated(auth()->user()));
+
 
         return redirect()->route('experiences.index')
             ->with('success', 'Experience updated successfully');
@@ -113,6 +117,8 @@ class ExperienceController extends Controller
     public function destroy($id)
     {
         $experience = Experience::find($id)->delete();
+        event(new CandidateProfileUpdated(auth()->user()));
+
 
         return redirect()->route('experiences.index')
             ->with('success', 'Experience deleted successfully');
