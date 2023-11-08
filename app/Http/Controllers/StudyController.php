@@ -93,6 +93,7 @@ class StudyController extends Controller
 
         $study->update($request->all());
         event(new CandidateProfileUpdated(auth()->user()));
+        
 
         return redirect()->route('studies.index')
             ->with('success', 'Study updated successfully');

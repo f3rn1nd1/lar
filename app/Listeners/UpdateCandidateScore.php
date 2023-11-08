@@ -9,9 +9,16 @@ use App\Models\Experience;
 use App\Models\Skill;
 use App\Models\Study;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
-class UpdateCandidateScore
+
+
+
+class UpdateCandidateScore implements ShouldQueue 
 {
+
+    use InteractsWithQueue;
+    
     /**
      * Create the event listener.
      *
@@ -32,6 +39,10 @@ class UpdateCandidateScore
     {
         $user = $event->user;
         $user->loadCount(['skills', 'experiences', 'studies']);
+        Log::info('Updating score for user: ' . $user->rut);
+        Log::info('Listener UpdateCandidateScore handled for user: ' . $event->user->rut);
+
+
 
         // Si usas increment, no necesitas calcular el total de antemano,
         // simplemente incrementas por cada evento. Esto es más efectivo si tu evento
