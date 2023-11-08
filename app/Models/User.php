@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Experience;
 
 class User extends Authenticatable
 {
@@ -22,7 +23,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'rut', 'nombre', 'apellido_paterno', 'apellido_materno', 'email', 'password',
+        'rut', 'nombre', 'apellido_paterno', 'apellido_materno', 'email', 'password','score',
+
     ];
 
     /**
@@ -43,4 +45,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function experiences()
+    {
+       
+        return $this->hasMany(Experience::class, 'user_rut', 'rut');
+    }
+    public function skills()
+    {
+        return $this->hasMany(Skill::class, 'user_rut', 'rut');
+    }
+    public function studies()
+    {
+        return $this->hasMany(Study::class, 'user_rut', 'rut');
+    }
 }
