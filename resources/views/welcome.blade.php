@@ -432,7 +432,7 @@
                 <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
                     <div class="text-center text-sm text-gray-500 sm:text-left">
                         <div class="flex items-center pb-4 ms-5 ps-4 ">
-                            <a class="btn btn-primary" href="{{route('candidates')}}" role="button">Link</a>
+                            <a class="btn btn-primary" href="{{route('candidates')}}" role="button">Ver candidatos</a>
                         </div>
                     </div>
 
