@@ -21,8 +21,7 @@ return new class extends Migration
             $table->string('puesto',30);
             $table->date('f_inicio');
             $table->date('f_fin');
-            $table->string('nivel_experiencia');
-            
+            $table->enum('nivel_experiencia', ['bajo', 'medio', 'alto']);
             $table->foreign('user_rut')
             ->references('rut')->on('users')
             ->onDelete('cascade')->onUpdate('cascade');

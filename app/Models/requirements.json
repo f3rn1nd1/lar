@@ -1,0 +1,51 @@
+{
+    "skills":[
+        {
+            "requirement": "astronauta",
+            "skill_level": "alto",
+            "priority": "high",
+            "is_exclusive": false
+        },
+        {
+
+            "requirement": "cooking",
+            "skill_level": "bajo",
+            "priority": "low",
+            "is_exclusive": false
+        },
+        {
+
+            "requirement": "surfing",
+            "skill_level": "medio",
+            "priority": "low",
+            "is_exclusive": false
+        }
+    ],
+    "studies":[
+        {
+            "requirement":"astrophysicist degree",
+            "priority":"low",
+            "is_exclusive": false
+        }
+    ],
+    "experience":[
+        {
+            "requirement":"farmer",
+            "months": 12,
+            "priority":"high",
+            "is_exclusive": false
+            
+        }
+    ],
+    "age": {
+        "min": 18,
+        "max": 50,
+        "priority":"high",
+        "is_exclusive": false
+    },
+    "sex":{
+        "type": "female",
+        "priority":"low",
+        "is_exclusive": true
+    }
+}

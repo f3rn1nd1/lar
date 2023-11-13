@@ -25,9 +25,14 @@ use Illuminate\Database\Eloquent\Model;
 class JobOffers extends Model
 {
     
-    static $rules = [
-		'user_rut' => 'required',
+    public static $rules = [
+        'user_rut' => 'required',
+        'puesto' => 'required|string|max:255',
+        'requirements_json' => 'required|json',
+        'empresa' => 'required|string|max:255',
+        'descripcion' => 'required|string|max:255',
     ];
+
 
     protected $perPage = 20;
 
