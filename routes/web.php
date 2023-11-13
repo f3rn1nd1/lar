@@ -24,5 +24,8 @@ Auth::routes();
 Route::resource('skills', App\Http\Controllers\SkillController::class)->middleware('auth');
 Route::resource('experiences', App\Http\Controllers\ExperienceController::class)->middleware('auth');
 Route::resource('studies', App\Http\Controllers\StudyController::class)->middleware('auth');
+Route::middleware(['role:reclutador'])->group(function () {
+    Route::resource('joboffers', App\Http\Controllers\JobOffersController::class);
+});
 Route::get('/candidates', [App\Http\Controllers\CandidateController::class, 'showCandidates'])->name('candidates');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
