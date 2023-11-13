@@ -33,6 +33,7 @@
                     <!-- Left Side Of Navbar -->
                     @if(Auth::check())
                     <ul class="navbar-nav me-auto">
+                        <label class="nav-link"><strong>Curriculum</strong></label>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('skills.index') }}">{{ __('Skills') }}</a>
                         </li>
@@ -42,9 +43,14 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('studies.index') }}">{{ __('Studies') }}</a>
                         </li>
-
+                        @endif
+                        @if(Auth::check() && Auth::user()->role == 'reclutador')
+                        <label class="nav-link"><strong>Recruiter:</strong></label>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('joboffers.index') }}">{{ __('Recruit') }}</a>
+                        </li>
+                        @endif
                     </ul>
-                    @endif
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -64,7 +70,7 @@
                         @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
+                                {{ Auth::user()->nombre}} {{ Auth::user()->apellido_paterno}}
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
