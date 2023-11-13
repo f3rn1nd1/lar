@@ -23,10 +23,22 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'rut', 'nombre', 'apellido_paterno', 'apellido_materno', 'email', 'password','score',
+        'rut', 'nombre', 'apellido_paterno', 'apellido_materno', 'email', 'password','score', 'role',
 
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($user) {
+            if(empty($user->role)){
+                $user->role = 'personal';
+            }
+            if(empty($user->score)){
+                $user->score = 0;
+            }
+        });
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
