@@ -59,10 +59,10 @@
     @endif
 
     <!-- Bloque para 'experience' -->
-    @if(isset($jobOffer->requirements_json['experiences']) && is_array($jobOffer->requirements_json['experiences']))
+    @if(isset($jobOffer->requirements_json['experience']) && is_array($jobOffer->requirements_json['experience']))
     <div class="card mt-5">
         <div class="card-body">
-            @foreach ($jobOffer->requirements_json['experiences'] as $experience)
+            @foreach ($jobOffer->requirements_json['experience'] as $experience)
                 <p>{{ $experience }}</p>
             @endforeach
         </div>
