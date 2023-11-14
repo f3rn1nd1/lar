@@ -26,10 +26,17 @@ class JobOffers extends Model
 {
     
     public static $rules = [
-        'user_rut' => 'required',
+        'user_rut' => 'required|integer',  // Asegúrate de que el tipo de dato sea correcto
         'puesto' => 'required|string|max:255',
         'empresa' => 'required|string|max:255',
         'descripcion' => 'required|string|max:255',
+        'choosen_one' => 'nullable|integer', // Si es un ID, por ejemplo
+        // Reglas para los campos dentro del JSON
+        'skills.*' => 'string|max:255', // Cada habilidad debe ser una cadena
+        'studies.*' => 'string|max:255', // Cada estudio debe ser una cadena
+        'experience.*' => 'string|max:255', // Cada experiencia debe ser una cadena
+        'age' => 'nullable|integer', // Edad, si es relevante
+        'sex' => 'nullable|string|max:255', // Sexo, si es relevante
     ];
 
 
@@ -40,7 +47,7 @@ class JobOffers extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_rut', 'puesto', 'requirements_json', 'empresa', 'descripcion', 'choosen_one'];
+    protected $fillable = ['user_rut', 'puesto', 'requirements_json', 'empresa', 'descripcion', 'choosen_one','requirements_json',];
 
     protected $casts = [
         'requirements_json' => 'array'
