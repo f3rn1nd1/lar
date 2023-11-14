@@ -13,7 +13,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Skill') }}
+                                {{ __('Job offers') }}
                             </span>
 
                              <div class="float-right">
@@ -53,9 +53,9 @@
 											<td>{{ $jobs->puesto }}</td>
 
                                             <td>
-                                                <form action="{{ route('joboffer.destroy',$jobs->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('joboffer.show',$jobs->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('joboffer.edit',$jobs->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                <form action="{{ route('joboffers.destroy',$jobs->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('joboffers.show',$jobs->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('joboffers.edit',$jobs->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
@@ -68,7 +68,6 @@
                         </div>
                     </div>
                 </div>
-                {!! $jobs->links() !!}
             </div>
         </div>
     </div>

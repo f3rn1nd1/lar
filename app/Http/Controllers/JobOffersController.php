@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\JobOffers;
 use Illuminate\Http\Request;
 use App\Events\CandidateProfileUpdated;
+use app\Models\User;
 
 class JobOffersController extends Controller
 {
@@ -22,6 +23,15 @@ class JobOffersController extends Controller
         return view('joboffers.create', compact('job','user'));
     }
 
+    public function insert_into_json($id)
+    {
+        
+        $user = auth()->user();
+        $job = JobOffers::find($id)->where("user_rut", auth()->user()->rut)->firstOrFail();
+        return view('joboffers.insertjson', compact('job','user'));
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -33,27 +43,19 @@ class JobOffersController extends Controller
         // Validate the request
         $request->validate(JobOffers::$rules);
 
-        // Extract form input
-        $skills = $request->input('skills', []);
-        $studies = $request->input('studies', []);
-        $experience = $request->input('experience', []);
-        $age = $request->input('age', []);
-        $sex = $request->input('sex', []);
-
-        // Create JSON structure
-        $requirementsJson = [
-            'skills' => $skills,
-            'studies' => $studies,
-            'experience' => $experience,
-            'age' => $age,
-            'sex' => $sex,
+        // Create JSON structure with null values
+        $requirements_json = [
+            'skills' => [],
+            'studies' => [],
+            'experience' => [],
+            'age' => null,
+            'sex' => null,
         ];
 
-        // Create the JobOffers model
-        $jobOffer = JobOffers::create($request->all());
+        #use requirements_json to create the json and save it in the database
+        $jobOffer = JobOffers::create($request->all() + ['requirements_json' => $requirements_json]);
 
-        // Assign the requirements_json attribute
-        $jobOffer->requirements_json = $requirementsJson;
+
 
         // Save the model
         $jobOffer->save();
@@ -67,7 +69,13 @@ class JobOffersController extends Controller
             ->with('success', 'Job offer created successfully.');
     }
 
-    // ... other methods ...
+    public function show($id)
+    {
+        $users = User::all();
+        $user = auth()->user();
+        $jobOffer = JobOffers::find($id)->where("user_rut", auth()->user()->rut)->firstOrFail();
+        return view('joboffers.show', compact('jobOffer','user','users'));
+    }
 
     /**
      * Validate the parsed JSON structure for requirements.

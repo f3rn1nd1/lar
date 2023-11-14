@@ -25,6 +25,7 @@ Route::resource('skills', App\Http\Controllers\SkillController::class)->middlewa
 Route::resource('experiences', App\Http\Controllers\ExperienceController::class)->middleware('auth');
 Route::resource('studies', App\Http\Controllers\StudyController::class)->middleware('auth');
 Route::middleware(['role:reclutador'])->group(function () {
+    Route::get('joboffers/insertjson', [App\Http\Controllers\JobOffersController::class, 'insert_into_json'])->name('insertjson');
     Route::resource('joboffers', App\Http\Controllers\JobOffersController::class);
 });
 Route::get('/candidates', [App\Http\Controllers\CandidateController::class, 'showCandidates'])->name('candidates');

@@ -28,7 +28,6 @@ class JobOffers extends Model
     public static $rules = [
         'user_rut' => 'required',
         'puesto' => 'required|string|max:255',
-        'requirements_json' => 'required|json',
         'empresa' => 'required|string|max:255',
         'descripcion' => 'required|string|max:255',
     ];
