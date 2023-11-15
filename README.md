@@ -8,6 +8,8 @@ Deberá tener instalado node.js en su versión más reciente.
 
 Debe tener instalado Composer
 
+
+
 ## Instalacion
 Se recomienda clonar el repositorio con GitHub para escritorio debido a su fácil uso.
 
@@ -24,7 +26,9 @@ Una vez clonado el repositorio
    
    php artisan migrate
    
-4. Iniciar el proyecto localmente
+3. Correr el gestor de base de datos
+     
+5. Iniciar el proyecto localmente
    
    npm run dev - php artisan serve
 
